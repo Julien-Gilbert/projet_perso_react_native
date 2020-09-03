@@ -1,20 +1,19 @@
 import React, { Component } from "react"
-import { Text } from 'react-native'
+import { StyleSheet, Text, TextInput, View, StatusBar } from 'react-native'
 import getBooksFromApiWithText from './Api'
 
 class BookSearch extends Component {
 
-    getBooks() {
-        getBooksFromApiWithText("Potter").then(data => console.log(data));
+    getBooks(text) {
+        getBooksFromApiWithText(text).then(data => console.log(data));
     }
-    
-    render() {
-        this.getBooks();
-        return (
-            <Text>
-                BookSearch
-            </Text>
 
+    render() {
+        return (
+            <View>
+                <StatusBar barStyle="dark-content" />
+                <TextInput onSubmitEditing={(text) => this.getBooks(text)} placeholder="Tester"/>
+            </View>
         )
     }
 }
