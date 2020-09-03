@@ -1,7 +1,8 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, TextInput, View, StatusBar } from 'react-native'
+import { StyleSheet, Text, TextInput, View, StatusBar, FlatList } from 'react-native'
 import getBooksFromApiWithText from './Api'
 import DisplayBook from './DisplayBook'
+import books from './book_test'
 
 class BookSearch extends Component {
 
@@ -14,7 +15,10 @@ class BookSearch extends Component {
             <View>
                 <StatusBar barStyle="dark-content" />
                 <TextInput onSubmitEditing={(text) => this.getBooks(text)} placeholder="Tester"/>
-                <DisplayBook/>
+                <FlatList
+                    data={books}
+                    renderItem={({item}) => <Text>{item.title}</Text>}
+                />
             </View>
         )
     }
