@@ -26,14 +26,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import BookSearch from './BookSearch' 
+
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
     <>
-      <Text>
-        Hello World !
-      </Text>
+      <BookSearch/>
     </>
   );
 };
