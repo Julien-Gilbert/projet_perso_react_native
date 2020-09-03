@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, TextInput, View, StatusBar } from 'react-native'
 import getBooksFromApiWithText from './Api'
+import DisplayBook from './DisplayBook'
 
 class BookSearch extends Component {
 
@@ -13,6 +14,7 @@ class BookSearch extends Component {
             <View>
                 <StatusBar barStyle="dark-content" />
                 <TextInput onSubmitEditing={(text) => this.getBooks(text)} placeholder="Tester"/>
+                <DisplayBook/>
             </View>
         )
     }
