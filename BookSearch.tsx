@@ -6,18 +6,33 @@ import books from './book_test'
 
 class BookSearch extends Component {
 
-    getBooks(text) {
-        getBooksFromApiWithText(text).then(data => console.log(data));
+    constructor(props) {
+        super(props)
+        this.state = { books: [] }
+        this.searchedText = ""
+    }
+
+    getBooks() {
+        getBooksFromApiWithText(this.searchedText).then(data => {
+            this.setState({ books: data.docs })
+        })
+    }
+
+    searchTextInputChanged(text){
+        this.searchedText = text;
     }
 
     render() {
         return (
             <View>
                 <StatusBar barStyle="dark-content" />
-                <TextInput onSubmitEditing={(text) => this.getBooks(text)} placeholder="Tester"/>
+                <TextInput 
+                    onSubmitEditing={(text) => this.getBooks()} 
+                    placeholder="Rechercher"
+                    onChangeText={(text) => this.searchTextInputChanged(text) }/>
                 <FlatList
-                    data={books}
-                    renderItem={({item}) => <Text>{item.title}</Text>}
+                    data={this.state.books}
+                    renderItem={({item}) => <DisplayBook book={item}/>}
                 />
             </View>
         )
