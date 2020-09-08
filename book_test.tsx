@@ -1,4 +1,4 @@
-export default books = [
+export const books = [
     {
         id: 1,
         title: "Harry Potter",

@@ -32,9 +32,7 @@ declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-    <>
-      <BookSearch/>
-    </>
+    <BookSearch/>
   );
 };
 

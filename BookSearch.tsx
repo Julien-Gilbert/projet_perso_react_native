@@ -2,24 +2,25 @@ import React, { Component } from "react"
 import { StyleSheet, Text, TextInput, View, StatusBar, FlatList } from 'react-native'
 import getBooksFromApiWithText from './Api'
 import DisplayBook from './DisplayBook'
-import books from './book_test'
 
-class BookSearch extends Component {
+export default class BookSearch extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { books: [] }
-        this.searchedText = ""
+        this.state = { books: [], searchedText: "" }
     }
 
     getBooks() {
-        getBooksFromApiWithText(this.searchedText).then(data => {
-            this.setState({ books: data.docs })
-        })
+    //componentDidMount() {
+        if(this.state.searchedText !== "") {
+            getBooksFromApiWithText(this.state.searchedText).then(data => {
+                this.setState({ books: data.docs })
+            })
+        }
     }
 
-    searchTextInputChanged(text){
-        this.searchedText = text;
+    setSearchedText(text) {
+        this.searchedText = text
     }
 
     render() {
@@ -27,9 +28,9 @@ class BookSearch extends Component {
             <View>
                 <StatusBar barStyle="dark-content" />
                 <TextInput 
-                    onSubmitEditing={(text) => this.getBooks()} 
+                    onSubmitEditing={() => this.getBooks()}
                     placeholder="Rechercher"
-                    onChangeText={(text) => this.searchTextInputChanged(text) }/>
+                    onChangeText={(text) => this.setState({searchedText: text})} /> 
                 <FlatList
                     data={this.state.books}
                     renderItem={({item}) => <DisplayBook book={item}/>}
@@ -38,5 +39,3 @@ class BookSearch extends Component {
         )
     }
 }
-
-export default BookSearch
