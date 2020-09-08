@@ -27,12 +27,14 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import BookSearch from './BookSearch' 
+import Navigation from './Navigation';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-    <BookSearch/>
+    //<BookSearch/>
+    <Navigation/>
   );
 };
 
