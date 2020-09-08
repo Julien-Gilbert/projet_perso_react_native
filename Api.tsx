@@ -5,3 +5,7 @@ export default function getBooksFromApiWithText(text){
         .then((response) => response.json())
         .catch((error) => console.log(error))
 }
+
+export function getCoverFromApi(idCover) {
+    return 'http://covers.openlibrary.org/b/id/' + idCover + '-L.jpg'
+}

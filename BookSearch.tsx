@@ -19,10 +19,6 @@ export default class BookSearch extends Component {
         }
     }
 
-    setSearchedText(text) {
-        this.searchedText = text
-    }
-
     render() {
         return (
             <View>
