@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { getCoverFromApi } from './Api'
+import { connect } from 'react-redux'
 
 export default class DisplayBook extends Component {
 
     render() {
         const { book } = this.props
-
+        console.log(this.props)
         return (
             <View style={styles.main_container}>
                 <Image
@@ -30,3 +31,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray'
     }
 })
+
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps)(DisplayBook)

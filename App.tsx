@@ -27,12 +27,16 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import BookSearch from './BookSearch' 
+import { Provider } from 'react-redux'
+import Store from './configureStore'
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-    <BookSearch/>
+    <Provider store={Store}>
+      <BookSearch/>
+    </Provider>
   );
 };
 
