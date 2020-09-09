@@ -6,7 +6,7 @@ export default function toggleFavorite(state = initialState, action) {
 
     switch(action.type) {
         case ("TOGGLE_STATE"):
-            const bookIndex = state.favoritesBook.findIndex(item => item.id === action.value.id)
+            const bookIndex = state.favoritesBook.findIndex(item => item.title === action.value.title)
 
             if(bookIndex !== -1){ //The book is already in the favorites
                 nextState = { ...state, favoritesBook: state.favoritesBook.filter( (item, index) => index !== bookIndex)}
