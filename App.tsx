@@ -29,13 +29,14 @@ import {
 import BookSearch from './BookSearch' 
 import { Provider } from 'react-redux'
 import Store from './configureStore'
+import Navigation from './Navigation';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
     <Provider store={Store}>
-      <BookSearch/>
+      <Navigation/>
     </Provider>
   );
 };
