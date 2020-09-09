@@ -11,7 +11,6 @@ export default class BookSearch extends Component {
     }
 
     getBooks() {
-    //componentDidMount() {
         if(this.state.searchedText !== "") {
             getBooksFromApiWithText(this.state.searchedText).then(data => {
                 this.setState({ books: data.docs })
