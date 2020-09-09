@@ -14,6 +14,19 @@ export default class DisplayBook extends Component {
         console.log(text)
     }
 
+    displayHeart(book) {
+        //On affiche le coeur uniquement si le livre fait partie des favoris
+        if(this.props.favoritesBook.findIndex(item => item.title === book.title) !== -1){
+            return(
+                <Image
+                    style={styles.favorite}
+                    source={require('./Images/favorite_plein.png')}
+                />
+
+            )
+        }
+    }
+
     componentDidUpdate() {
         console.log("componentDidUpdate : ")
 
@@ -31,7 +44,10 @@ export default class DisplayBook extends Component {
                     style={styles.image}
                     source={{uri: getCoverFromApi(book.cover_i)}}
                 />
-                <Text>{book.title}</Text>
+                <View style={styles.description}>
+                    <Text>{book.title}</Text>
+                    {this.displayHeart(book)}
+                </View>
             </TouchableOpacity>
             //</View>
         )
@@ -40,6 +56,7 @@ export default class DisplayBook extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
+        flex: 1,
         flexDirection: 'row'
     },
     image: {
@@ -47,6 +64,14 @@ const styles = StyleSheet.create({
         height: 180,
         margin: 5,
         backgroundColor: 'gray'
+    },
+    description: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    favorite: {
+        width: 50,
+        height: 50,
     }
 })
 
