@@ -20,7 +20,7 @@ export default class BookSearch extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.list}>
                 <StatusBar barStyle="dark-content" />
                 <TextInput 
                     onSubmitEditing={() => this.getBooks()}
@@ -34,3 +34,9 @@ export default class BookSearch extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    list: {
+        flex:1
+    }
+})
