@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { getCoverFromApi } from './Api'
 import { connect } from 'react-redux'
+import { StarIcon } from './StarIcon'
 
 export default class DisplayBook extends Component {
 
@@ -31,7 +32,12 @@ export default class DisplayBook extends Component {
                     style={styles.image}
                     source={{uri: getCoverFromApi(book.cover_i)}}
                 />
-                <Text>{book.title}</Text>
+                <View style={styles.title_container}>
+                    <Text style={styles.title}>{book.title}</Text>
+                    <View style={styles.star_icon}>
+                        <StarIcon/>
+                    </View>
+                </View>
             </TouchableOpacity>
             //</View>
         )
@@ -47,6 +53,16 @@ const styles = StyleSheet.create({
         height: 180,
         margin: 5,
         backgroundColor: 'gray'
+    },
+    title_container: {
+        flex: 1,
+        flexDirection: "row"
+    },
+    star_icon: {
+        flex: 1
+    },
+    title: {
+        flex: 5
     }
 })
 

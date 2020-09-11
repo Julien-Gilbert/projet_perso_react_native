@@ -36,12 +36,9 @@ declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
-    /*
     <Provider store={Store}>
       <Navigation/>
     </Provider>
-    */
-   <StarIcon/>
   );
 };
 
