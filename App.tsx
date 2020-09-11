@@ -29,15 +29,19 @@ import {
 import BookSearch from './BookSearch' 
 import { Provider } from 'react-redux'
 import Store from './configureStore'
-import Navigation from './Navigation';
+import Navigation from './Navigation'
+import { StarIcon } from './StarIcon'
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
+    /*
     <Provider store={Store}>
       <Navigation/>
     </Provider>
+    */
+   <StarIcon/>
   );
 };
 
