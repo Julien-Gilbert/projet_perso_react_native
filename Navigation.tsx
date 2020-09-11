@@ -4,6 +4,7 @@ import Favorites from "./Favorites"
 import BookSearch from "./BookSearch"
 import  {Image, StyleSheet} from 'react-native'
 import React, { Component } from "react"
+import { Animation } from "./Animation"
 
 const BooksTabNavigator = createBottomTabNavigator({
     BookSearch: {
@@ -25,6 +26,17 @@ const BooksTabNavigator = createBottomTabNavigator({
             tabBarIcon: () => {
                 return <Image
                     source={require('./Images/favorite_plein.png')}
+                    style={styles.icon} />
+            }
+        }
+    },
+    Animation: {
+        screen: Animation,
+        navigationOptions: {
+            title: "Animation",
+            tabBarIcon: () => {
+                return <Image
+                    source={require('./Images/animation.png')}
                     style={styles.icon} />
             }
         }
