@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, Text, Button, View, ScrollView } from "react-native";
+import { StyleSheet, Animated, Text, Button, View, ScrollView } from "react-native";
 
 export class Credit extends Component {
 
@@ -19,19 +19,34 @@ export class Credit extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
-            <ScrollView>
-                <Animated.View style={[{
-                    marginTop: this.state.scrollAnim
-                }]}>
-                    <Text>Test</Text>
-                </Animated.View>
-            </ScrollView>
+            <View style={{flex: 1, backgroundColor: "gray"}}>
+                <ScrollView style={{flex: 2}}>
+                    <Animated.View style={[{
+                        marginTop: this.state.scrollAnim
+                    }]}>
+                        <Text style={styles.text}>Test</Text>
+                    </Animated.View>
+                </ScrollView>
                
-                <Button title="Test" onPress={this.launchScrollCredit} />
-                <Button title="Reset" onPress={Animated.timing(this.state.scrollAnim).reset} />
+               <View style={styles.button_container}>
+                    <Button color="black" title="Launch" onPress={this.launchScrollCredit} />
+                    <Button color="black" title="Reset" onPress={Animated.timing(this.state.scrollAnim).reset} />
+               </View>
+
             </View>
         )
     }
 }
 
+
+
+const styles = StyleSheet.create({
+    text: {
+        textAlign: 'center',
+        fontSize: 30
+    },
+    button_container: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    }
+})
