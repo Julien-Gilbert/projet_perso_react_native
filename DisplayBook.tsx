@@ -1,14 +1,37 @@
 import React, { Component } from "react"
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { Animated, View, Text, Image, StyleSheet, Button, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { getCoverFromApi } from './Api'
 import { connect } from 'react-redux'
 import { StarIcon } from './StarIcon'
+import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace"
 
 export default class DisplayBook extends Component {
 
+    state = {
+        fadeAnim: new Animated.Value(0)
+    }
+
     toggleFavorite(book) {
+        if(this.props.favoritesBook.findIndex(item => item.title === book.title) === -1) {
+            console.log("Afficher")
+            Animated.timing(this.state.fadeAnim, {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: false
+            }).start()
+        }
+        else {
+            console.log("Effacer")
+            Animated.timing(this.state.fadeAnim, {
+                toValue: 0,
+                duration: 1000,
+                useNativeDriver: false
+            }).start()
+        }
+
         const action = { type: "TOGGLE_STATE", value: book}
         this.props.dispatch(action)
+
     }
 
     displayText(text){
@@ -34,15 +57,24 @@ export default class DisplayBook extends Component {
                 />
                 <View style={styles.title_container}>
                     <Text style={styles.title}>{book.title}</Text>
-                    <View style={styles.star_icon}>
+
+                    <Animated.View
+                        style={[styles.star_icon, {
+                            opacity: this.state.fadeAnim
+                        }]} >
+
                         <StarIcon/>
-                    </View>
+
+                    </Animated.View>
+                    
                 </View>
             </TouchableOpacity>
             //</View>
         )
     }
 }
+
+//<View style={styles.star_icon}>
 
 const styles = StyleSheet.create({
     main_container: {
