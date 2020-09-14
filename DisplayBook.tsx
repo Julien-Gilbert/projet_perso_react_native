@@ -12,8 +12,6 @@ export default class DisplayBook extends Component {
         super(props)
         const { book } = this.props
         if(this.props.favoritesBook.findIndex(item => item.title === book.title) !== -1) {
-            //this.setState({fadeAnim: 1})
-            //this.setState({zoomAnim: 1})
             this.state = {
                 fadeAnim: new Animated.Value(1),
                 zoomAnim: new Animated.Value(1)
@@ -29,9 +27,7 @@ export default class DisplayBook extends Component {
     }
 
     toggleFavorite(book) {
-        console.log(this.state.fadeAnim)
         if(this.props.favoritesBook.findIndex(item => item.title === book.title) === -1) {
-            console.log("Afficher")
             Animated.timing(this.state.fadeAnim, {
                 toValue: 1,
                 duration: 1000,
@@ -52,7 +48,6 @@ export default class DisplayBook extends Component {
             ]).start()
         }
         else {
-            console.log("Effacer")
             Animated.timing(this.state.fadeAnim, {
                 toValue: 0,
                 duration: 1000,
@@ -62,30 +57,21 @@ export default class DisplayBook extends Component {
 
         const action = { type: "TOGGLE_STATE", value: book}
         this.props.dispatch(action)
-
-
-        console.log(this.state.fadeAnim)
-        console.log("")
-    }
-
-    displayText(text){
-        console.log(text)
     }
 
     render() {
         const { book } = this.props
         return (
-            //<View style={styles.main_container}>
-            <TouchableOpacity style={styles.main_container} onPress={() => this.toggleFavorite(book)}>
+            <TouchableOpacity style={styles.mainContainer} onPress={() => this.toggleFavorite(book)}>
                 <Image
                     style={styles.image}
                     source={{uri: getCoverFromApi(book.cover_i)}}
                 />
-                <View style={styles.title_container}>
+                <View style={styles.titleContainer}>
                     <Text style={styles.title}>{book.title}</Text>
 
                     <Animated.View
-                        style={[styles.star_icon, {
+                        style={[styles.starIcon, {
                             opacity: this.state.fadeAnim,
                             flex: 2
                         }]} >
@@ -96,15 +82,12 @@ export default class DisplayBook extends Component {
                     
                 </View>
             </TouchableOpacity>
-            //</View>
         )
     }
 }
 
-//<View style={styles.star_icon}>
-
 const styles = StyleSheet.create({
-    main_container: {
+    mainContainer: {
         flexDirection: 'row',
         flex: 1
     },
@@ -114,11 +97,11 @@ const styles = StyleSheet.create({
         margin: 5,
         backgroundColor: 'gray'
     },
-    title_container: {
+    titleContainer: {
         flex: 1,
         flexDirection: "row"
     },
-    star_icon: {
+    starIcon: {
         flex: 1
     },
     title: {
