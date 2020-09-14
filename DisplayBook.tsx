@@ -10,8 +10,16 @@ export default class DisplayBook extends Component {
     state = {
         fadeAnim: new Animated.Value(0)
     }
+ 
+    componentDidMount() {
+        const { book } = this.props
+        if(this.props.favoritesBook.findIndex(item => item.title === book.title) !== -1) {
+            this.setState(({fadeAnim: 1}))
+        }
+    }
 
     toggleFavorite(book) {
+        console.log(this.state.fadeAnim)
         if(this.props.favoritesBook.findIndex(item => item.title === book.title) === -1) {
             console.log("Afficher")
             Animated.timing(this.state.fadeAnim, {
@@ -32,12 +40,15 @@ export default class DisplayBook extends Component {
         const action = { type: "TOGGLE_STATE", value: book}
         this.props.dispatch(action)
 
+
+        console.log(this.state.fadeAnim)
+        console.log("")
     }
 
     displayText(text){
         console.log(text)
     }
-
+/*
     componentDidUpdate() {
         console.log("componentDidUpdate : ")
 
@@ -45,7 +56,7 @@ export default class DisplayBook extends Component {
             console.log(this.props.favoritesBook[i].title)
         }
     }
-
+*/
     render() {
         const { book } = this.props
         return (
