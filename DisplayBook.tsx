@@ -27,19 +27,10 @@ export default class DisplayBook extends Component {
         }
     }
 
-    componentDidUpdate() {
-        console.log("componentDidUpdate : ")
-
-        for(let i=0 ; i<this.props.favoritesBook.length ; i++) {
-            console.log(this.props.favoritesBook[i].title)
-        }
-    }
-
     render() {
         const { book } = this.props
         return (
-            //<View style={styles.main_container}>
-            <TouchableOpacity style={styles.main_container} onPress={() => this.toggleFavorite(book)}>
+            <TouchableOpacity style={styles.mainContainer} onPress={() => this.toggleFavorite(book)}>
                 <Image
                     style={styles.image}
                     source={{uri: getCoverFromApi(book.cover_i)}}
@@ -49,13 +40,12 @@ export default class DisplayBook extends Component {
                     {this.displayHeart(book)}
                 </View>
             </TouchableOpacity>
-            //</View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    main_container: {
+    mainContainer: {
         flex: 1,
         flexDirection: 'row'
     },
