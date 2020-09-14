@@ -5,6 +5,7 @@ import BookSearch from "./BookSearch"
 import  {Image, StyleSheet} from 'react-native'
 import React, { Component } from "react"
 import { Animation } from "./Animation"
+import { Credit } from './Credit'
 
 const BooksTabNavigator = createBottomTabNavigator({
     BookSearch: {
@@ -37,6 +38,17 @@ const BooksTabNavigator = createBottomTabNavigator({
             tabBarIcon: () => {
                 return <Image
                     source={require('./Images/animation.png')}
+                    style={styles.icon} />
+            }
+        }
+    },
+    Credit: {
+        screen: Credit,
+        navigationOptions: {
+            title: "Credit",
+            tabBarIcon: () => {
+                return <Image
+                    source={require('./Images/credit.png')}
                     style={styles.icon} />
             }
         }
