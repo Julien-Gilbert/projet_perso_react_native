@@ -3,19 +3,29 @@ import { Animated, View, Text, Image, StyleSheet, Button, TouchableOpacity, Touc
 import { getCoverFromApi } from './Api'
 import { connect } from 'react-redux'
 import { StarIcon } from './StarIcon'
-import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace"
+
+AnimatedStar = Animated.createAnimatedComponent(StarIcon);
 
 export default class DisplayBook extends Component {
 
-    state = {
-        fadeAnim: new Animated.Value(0)
-    }
- 
-    componentDidMount() {
+    constructor(props) {
+        super(props)
         const { book } = this.props
         if(this.props.favoritesBook.findIndex(item => item.title === book.title) !== -1) {
-            this.setState(({fadeAnim: 1}))
+            //this.setState({fadeAnim: 1})
+            //this.setState({zoomAnim: 1})
+            this.state = {
+                fadeAnim: new Animated.Value(1),
+                zoomAnim: new Animated.Value(1)
+            }
         }
+        else {
+            this.state = {
+                fadeAnim: new Animated.Value(0),
+                zoomAnim: new Animated.Value(1)
+            }
+        }
+
     }
 
     toggleFavorite(book) {
@@ -27,6 +37,19 @@ export default class DisplayBook extends Component {
                 duration: 1000,
                 useNativeDriver: false
             }).start()
+
+            Animated.sequence([
+                Animated.timing(this.state.zoomAnim, {
+                    toValue: 2,
+                    duration: 500,
+                    useNativeDriver: false
+                }),
+                Animated.timing(this.state.zoomAnim, {
+                    toValue: 1,
+                    duration: 500,
+                    useNativeDriver: false
+                })
+            ]).start()
         }
         else {
             console.log("Effacer")
@@ -48,15 +71,7 @@ export default class DisplayBook extends Component {
     displayText(text){
         console.log(text)
     }
-/*
-    componentDidUpdate() {
-        console.log("componentDidUpdate : ")
 
-        for(let i=0 ; i<this.props.favoritesBook.length ; i++) {
-            console.log(this.props.favoritesBook[i].title)
-        }
-    }
-*/
     render() {
         const { book } = this.props
         return (
@@ -71,10 +86,11 @@ export default class DisplayBook extends Component {
 
                     <Animated.View
                         style={[styles.star_icon, {
-                            opacity: this.state.fadeAnim
+                            opacity: this.state.fadeAnim,
+                            flex: 2
                         }]} >
 
-                        <StarIcon/>
+                        <AnimatedStar zoom={this.state.zoomAnim}/>
 
                     </Animated.View>
                     
@@ -89,7 +105,8 @@ export default class DisplayBook extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        flex: 1
     },
     image: {
         width: 120,
