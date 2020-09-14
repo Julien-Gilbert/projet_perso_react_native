@@ -67,6 +67,7 @@ export default class DisplayBook extends Component {
                     style={styles.image}
                     source={{uri: getCoverFromApi(book.cover_i)}}
                 />
+
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{book.title}</Text>
 
@@ -79,7 +80,6 @@ export default class DisplayBook extends Component {
                         <AnimatedStar zoom={this.state.zoomAnim}/>
 
                     </Animated.View>
-                    
                 </View>
             </TouchableOpacity>
         )
@@ -106,6 +106,14 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 5
+    },
+    description: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    favorite: {
+        width: 50,
+        height: 50
     }
 })
 
